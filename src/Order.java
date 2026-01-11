@@ -22,11 +22,17 @@ public class Order {
             return false;
         }
         Order order = (Order) o;
-        int i = 0;
-        if (!(Objects.equals(customer, order.customer)) ||
-                (basket.length != order.basket.length)) {
+
+        if (!(Objects.equals(customer, order.customer))) {
+            return false;
+        } else if ( (basket == null) && (order.basket == null) ) {
+            return true;
+        }else if ( (basket == null) || (order.basket == null) ) {
+            return false;
+        } else if ( basket.length != order.basket.length) {
             return false;
         } else {
+            int i = 0;
             for (final Product current : basket) {
                 if (current == null) {
                     return false;
