@@ -23,17 +23,20 @@ public class Order {
         }
         Order order = (Order) o;
         int i = 0;
-        if (Objects.equals(customer, order.customer)) {
+        if (!(Objects.equals(customer, order.customer)) ||
+                (basket.length != order.basket.length)) {
+            return false;
+        } else {
             for (final Product current : basket) {
                 if (current == null) {
                     return false;
                 } else if (current.equals(order.basket[i])) {
-                    i ++;
+                    i++;
                 } else {
                     return false;
                 }
             }
             return true;
-        } else return false;
+        }
     }
 }
