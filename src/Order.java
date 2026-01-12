@@ -25,24 +25,29 @@ public class Order {
 
         if (!(Objects.equals(customer, order.customer))) {
             return false;
-        } else if ( (basket == null) && (order.basket == null) ) {
-            return true;
-        }else if ( (basket == null) || (order.basket == null) ) {
-            return false;
-        } else if ( basket.length != order.basket.length) {
-            return false;
-        } else {
-            int i = 0;
-            for (final Product current : basket) {
-                if (current == null) {
-                    return false;
-                } else if (current.equals(order.basket[i])) {
-                    i++;
-                } else {
-                    return false;
-                }
-            }
+        }
+        if ( (basket == null) && (order.basket == null) ) {
             return true;
         }
+        if ( (basket == null) || (order.basket == null) ) {
+            return false;
+        }
+        if ( basket.length != order.basket.length) {
+            return false;
+        }
+
+        for (int i = 0; i < basket.length; i++) {
+
+            if ((basket[i] == null) && (order.basket[i] == null)) {
+                continue;
+            }
+            if ((basket[i] == null) || (order.basket[i] == null)) {
+                return false;
+            }
+            if (!(basket[i].equals(order.basket[i]))) {
+                return false;
+            }
+        }
+        return true;
     }
 }
